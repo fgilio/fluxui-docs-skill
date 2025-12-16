@@ -1,5 +1,7 @@
 # Flux UI CLI
 
+> **Note**: This tool caches documentation from [fluxui.dev](https://fluxui.dev). Permission to redistribute this content is pending approval from the Flux UI team.
+
 Self-contained CLI for accessing Flux UI documentation offline. No PHP required.
 
 ## Usage
