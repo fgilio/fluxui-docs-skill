@@ -15,6 +15,6 @@
     "KevinGH\\Box\\Compactor\\Php",
     "KevinGH\\Box\\Compactor\\Json"
   ],
-  "main": "flux",
-  "output": "builds/flux.phar"
+  "main": "fluxui-docs",
+  "output": "builds/fluxui-docs.phar"
 }

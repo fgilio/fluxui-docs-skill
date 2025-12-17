@@ -3,9 +3,9 @@
 ## Setup
 
 ```bash
-cd ~/.claude/skills/flux-ui/src
+cd ~/.claude/skills/fluxui-docs/src
 composer install
-php flux --help
+php fluxui-docs --help
 ```
 
 ## Development Commands
@@ -13,9 +13,9 @@ php flux --help
 These commands are available in development (not in production binary):
 
 ```bash
-php flux update              # Scrape latest docs from fluxui.dev
-php flux build               # Build production binary
-php flux test                # Run tests
+php fluxui-docs update              # Scrape latest docs from fluxui.dev
+php fluxui-docs build               # Build production binary
+php fluxui-docs test                # Run tests
 ```
 
 ## Updating Documentation
@@ -23,7 +23,7 @@ php flux test                # Run tests
 When Flux UI releases new components:
 
 ```bash
-php flux update              # Scrape latest docs
+php fluxui-docs update              # Scrape latest docs
 cd ..
 git add data/
 git commit -m "Update Flux UI docs"
@@ -33,11 +33,11 @@ git push
 ### Update Options
 
 ```bash
-php flux update                        # Update all
-php flux update --item=button          # Update single component
-php flux update --category=component   # Category for single item
-php flux update --delay=1000           # Custom delay (ms)
-php flux update --dry-run              # Preview only
+php fluxui-docs update                        # Update all
+php fluxui-docs update --item=button          # Update single component
+php fluxui-docs update --category=component   # Category for single item
+php fluxui-docs update --delay=1000           # Custom delay (ms)
+php fluxui-docs update --dry-run              # Preview only
 ```
 
 ## Building
@@ -54,14 +54,14 @@ phpcli-spc-build --extensions "ctype,fileinfo,filter,iconv,mbstring,mbregex,phar
 ### Build production binary
 
 ```bash
-php flux build               # Builds + copies to ../flux
-php flux build --no-install  # Only builds to builds/flux
+php fluxui-docs build               # Builds + copies to ../fluxui-docs
+php fluxui-docs build --no-install  # Only builds to builds/fluxui-docs
 ```
 
 ## Testing
 
 ```bash
-php flux test
+php fluxui-docs test
 # or
 ./vendor/bin/pest
 ```

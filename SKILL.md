@@ -1,5 +1,5 @@
 ---
-name: flux-ui
+name: fluxui-docs
 description: >
   Livewire Flux UI component documentation lookup.
   Provides offline access to fluxui.dev documentation via CLI.
@@ -15,54 +15,53 @@ Offline Flux UI documentation with JSON output for Claude Code integration.
 
 | Command | Purpose |
 |---------|---------|
-| `flux docs` | List all components, layouts, guides |
-| `flux search <query>` | Fuzzy search documentation |
-| `flux show <name>` | Display full documentation |
+| `~/.claude/skills/fluxui-docs/fluxui-docs docs` | List all components, layouts, guides |
+| `~/.claude/skills/fluxui-docs/fluxui-docs search <query>` | Fuzzy search documentation |
+| `~/.claude/skills/fluxui-docs/fluxui-docs show <name>` | Display full documentation |
 
 ## Commands
 
-### flux docs
+### fluxui-docs docs
 
 List available documentation items.
 
 ```bash
-flux docs                          # List all
-flux docs --category=components    # Components only
-flux docs --json                   # JSON output
+~/.claude/skills/fluxui-docs/fluxui-docs docs                          # List all
+~/.claude/skills/fluxui-docs/fluxui-docs docs --category=components    # Components only
+~/.claude/skills/fluxui-docs/fluxui-docs docs --json                   # JSON output
 ```
 
-### flux search
+### fluxui-docs search
 
 Search documentation by name or description.
 
 ```bash
-flux search button                 # Search for button
-flux search "date picker"          # Search phrase
-flux search modal --limit 5        # Limit results
-flux search input --json           # JSON output
+~/.claude/skills/fluxui-docs/fluxui-docs search button                 # Search for button
+~/.claude/skills/fluxui-docs/fluxui-docs search "date picker"          # Search phrase
+~/.claude/skills/fluxui-docs/fluxui-docs search input --json           # JSON output
 ```
 
-### flux show
+### fluxui-docs show
 
 Display full documentation for an item.
 
 ```bash
-flux show button                   # Show button docs
-flux show modal --section=props    # Show specific section
-flux show dropdown --json          # JSON output
+~/.claude/skills/fluxui-docs/fluxui-docs show button                   # Show button docs
+~/.claude/skills/fluxui-docs/fluxui-docs show modal --section=props    # Show specific section
+~/.claude/skills/fluxui-docs/fluxui-docs show dropdown --json          # JSON output
 ```
 
 ## Usage Examples
 
 ```bash
 # Find form components
-flux search form
+~/.claude/skills/fluxui-docs/fluxui-docs search form
 
 # Get button variants
-flux show button
+~/.claude/skills/fluxui-docs/fluxui-docs show button
 
 # List all components
-flux docs --category=components
+~/.claude/skills/fluxui-docs/fluxui-docs docs --category=components
 ```
 
 ## Data Location

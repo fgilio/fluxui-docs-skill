@@ -8,21 +8,21 @@ Self-contained CLI for accessing Flux UI documentation offline. No PHP required.
 
 ```bash
 # List all documentation
-./flux docs
+./fluxui-docs docs
 
 # Search for components
-./flux search button
+./fluxui-docs search button
 
 # Show component documentation
-./flux show modal
+./fluxui-docs show modal
 ```
 
 ## Installation
 
-The `flux` binary is self-contained. You can:
+The `fluxui-docs` binary is self-contained. You can:
 
-1. Run directly: `~/.claude/skills/flux-ui/flux docs`
-2. Symlink to PATH: `ln -sf ~/.claude/skills/flux-ui/flux ~/.local/bin/flux`
+1. Run directly: `~/.claude/skills/fluxui-docs/fluxui-docs docs`
+2. Symlink to PATH: `ln -sf ~/.claude/skills/fluxui-docs/fluxui-docs ~/.local/bin/fluxui-docs`
 
 ## Development
 
