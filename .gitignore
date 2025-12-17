@@ -16,6 +16,9 @@
 /src/spc
 /src/*.phar
 
+# Local analytics data
+analytics.jsonl
+
 # Keep these tracked
 !/flux
 !/data/

@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Services\Analytics;
 use App\Services\DocRepository;
 use LaravelZero\Framework\Commands\Command;
 
@@ -19,14 +20,17 @@ class ListCommand extends Command
 
     protected $description = 'List available Flux UI documentation';
 
-    public function handle(DocRepository $repo): int
+    public function handle(DocRepository $repo, Analytics $analytics): int
     {
+        $startTime = microtime(true);
         $category = $this->option('category');
 
         // Validate category
         if ($category && ! in_array($category, ['components', 'layouts', 'guides'])) {
             $this->error("Invalid category: {$category}");
             $this->line('Valid categories: components, layouts, guides');
+            $analytics->track('docs', self::FAILURE, ['category' => $category], $startTime);
+
             return self::FAILURE;
         }
 
@@ -34,6 +38,8 @@ class ListCommand extends Command
 
         if ($this->option('json')) {
             $this->line(json_encode($items, JSON_PRETTY_PRINT));
+            $analytics->track('docs', self::SUCCESS, ['category' => $category], $startTime);
+
             return self::SUCCESS;
         }
 
@@ -54,6 +60,8 @@ class ListCommand extends Command
         if ($totalCount === 0) {
             $this->warn('No documentation found. Run "flux update" to fetch docs.');
         }
+
+        $analytics->track('docs', self::SUCCESS, ['category' => $category], $startTime);
 
         return self::SUCCESS;
     }

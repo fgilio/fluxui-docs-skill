@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Services\Analytics;
 use App\Services\DocRepository;
 use LaravelZero\Framework\Commands\Command;
 
@@ -20,8 +21,9 @@ class ShowCommand extends Command
 
     protected $description = 'Show documentation for a Flux UI item';
 
-    public function handle(DocRepository $repo): int
+    public function handle(DocRepository $repo, Analytics $analytics): int
     {
+        $startTime = microtime(true);
         $name = $this->argument('name');
         $doc = $repo->find($name);
 
@@ -37,15 +39,21 @@ class ShowCommand extends Command
                 }
             }
 
+            $analytics->track('show', self::FAILURE, ['item' => $name, 'found' => false], $startTime);
+
             return self::FAILURE;
         }
 
         if ($this->option('json')) {
             $this->line(json_encode($doc, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            $analytics->track('show', self::SUCCESS, ['item' => $name, 'found' => true], $startTime);
+
             return self::SUCCESS;
         }
 
         $this->renderDoc($doc, $this->option('section'));
+        $analytics->track('show', self::SUCCESS, ['item' => $name, 'found' => true], $startTime);
+
         return self::SUCCESS;
     }
 

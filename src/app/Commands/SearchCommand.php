@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Services\Analytics;
 use App\Services\SearchIndex;
 use LaravelZero\Framework\Commands\Command;
 
@@ -20,8 +21,9 @@ class SearchCommand extends Command
 
     protected $description = 'Search Flux UI documentation';
 
-    public function handle(SearchIndex $index): int
+    public function handle(SearchIndex $index, Analytics $analytics): int
     {
+        $startTime = microtime(true);
         $query = $this->argument('query');
         $limit = (int) $this->option('limit');
 
@@ -29,12 +31,22 @@ class SearchCommand extends Command
 
         if ($this->option('json')) {
             $this->line(json_encode($results, JSON_PRETTY_PRINT));
+            $analytics->track('search', self::SUCCESS, [
+                'query' => $query,
+                'result_count' => count($results),
+            ], $startTime);
+
             return self::SUCCESS;
         }
 
         if (empty($results)) {
             $this->warn("No results for: {$query}");
             $this->line('Try a different search term or run "flux list" to see all items.');
+            $analytics->track('search', self::SUCCESS, [
+                'query' => $query,
+                'result_count' => 0,
+            ], $startTime);
+
             return self::SUCCESS;
         }
 
@@ -51,6 +63,11 @@ class SearchCommand extends Command
         }, $results);
 
         $this->table(['Name', 'Category', 'Description'], $tableData);
+
+        $analytics->track('search', self::SUCCESS, [
+            'query' => $query,
+            'result_count' => count($results),
+        ], $startTime);
 
         return self::SUCCESS;
     }

@@ -27,3 +27,20 @@ The `fluxui-docs` binary is self-contained. You can:
 ## Development
 
 See [src/README.md](src/README.md) for building from source and updating documentation.
+
+## Analytics
+
+Usage data is stored locally in `analytics.jsonl` (no remote telemetry). Analyze with jq:
+
+```bash
+FILE=~/.claude/skills/fluxui-docs/analytics.jsonl
+
+# Command usage counts
+cat $FILE | jq -s 'group_by(.command) | map({command: .[0].command, count: length})'
+
+# Most searched terms
+cat $FILE | jq -s '[.[] | select(.command=="search")] | group_by(.context.query) | sort_by(-length) | .[0:10]'
+
+# Most viewed docs
+cat $FILE | jq -s '[.[] | select(.command=="show" and .context.found)] | group_by(.context.item) | sort_by(-length) | .[0:10]'
+```
