@@ -53,12 +53,20 @@ class SearchCommand extends Command
         $this->info("Results for: {$query}");
         $this->newLine();
 
-        $tableData = array_map(function ($result) {
+        $tableData = array_map(function ($result) use ($query) {
+            $name = $result['name'];
             $pro = ($result['pro'] ?? false) ? ' [Pro]' : '';
+
+            // Add context when match is from examples (components_used)
+            $context = '';
+            if (($result['match_source'] ?? '') === 'examples') {
+                $context = " (contains flux:{$query} in examples)";
+            }
+
             return [
-                $result['name'],
+                $name . $context,
                 $result['category'],
-                mb_substr($result['description'] ?? '', 0, 50) . (strlen($result['description'] ?? '') > 50 ? '...' : '') . $pro,
+                mb_substr($result['description'] ?? '', 0, 40) . (strlen($result['description'] ?? '') > 40 ? '...' : '') . $pro,
             ];
         }, $results);
 

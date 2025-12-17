@@ -18,6 +18,8 @@ Offline Flux UI documentation with JSON output for Claude Code integration.
 | `~/.claude/skills/fluxui-docs/fluxui-docs docs` | List all components, layouts, guides |
 | `~/.claude/skills/fluxui-docs/fluxui-docs search <query>` | Fuzzy search documentation |
 | `~/.claude/skills/fluxui-docs/fluxui-docs show <name>` | Display full documentation |
+| `~/.claude/skills/fluxui-docs/fluxui-docs usages <component>` | Find where a component is used |
+| `~/.claude/skills/fluxui-docs/fluxui-docs discover` | List undocumented components |
 
 ## Commands
 
@@ -51,6 +53,61 @@ Display full documentation for an item.
 ~/.claude/skills/fluxui-docs/fluxui-docs show dropdown --json          # JSON output
 ```
 
+### fluxui-docs usages
+
+Find where a component is used in documentation examples. Works for any component, including undocumented ones like `flux:subheading`.
+
+```bash
+~/.claude/skills/fluxui-docs/fluxui-docs usages subheading             # Find subheading usage
+~/.claude/skills/fluxui-docs/fluxui-docs usages modal.close            # Find sub-component usage
+~/.claude/skills/fluxui-docs/fluxui-docs usages button --json          # JSON output
+```
+
+Example output:
+```
+flux:subheading is used in:
+
+  components/modal
+    └─ Flyout
+    └─ Floating flyout
+
+Total: 1 page(s)
+```
+
+### fluxui-docs discover
+
+List components found in code examples but without their own documentation page. Surfaces "hidden" components.
+
+```bash
+~/.claude/skills/fluxui-docs/fluxui-docs discover                      # List all undocumented
+~/.claude/skills/fluxui-docs/fluxui-docs discover --json               # JSON output
+```
+
+Example output:
+```
+Sub-components (documented via parent):
+
+  flux:modal.close
+    → see: modal
+    → used in: modal
+
+  flux:modal.trigger
+    → see: modal
+    → used in: modal
+
+Components in examples only (no dedicated docs):
+
+  flux:subheading
+    → used in: modal, card
+
+  flux:spacer
+    → used in: modal, dropdown
+
+Summary:
+  Sub-components: 2
+  Undocumented: 2
+```
+
 ## Usage Examples
 
 ```bash
@@ -71,6 +128,7 @@ Documentation is stored in `data/` directory (versioned in git):
 - `data/layouts/` - Layout JSON files
 - `data/guides/` - Guide JSON files
 - `data/index.json` - Search index
+- `data/usages.json` - Component usage index (for usages/discover commands)
 
 ## Pro Components
 

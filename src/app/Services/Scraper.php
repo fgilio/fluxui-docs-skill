@@ -111,6 +111,10 @@ class Scraper
 
         $crawler = new Crawler($html);
 
+        $sections = $this->extractSections($crawler);
+        $componentsUsed = $this->extractComponentsFromExamples($sections);
+        $subComponents = $this->extractSubComponents($name, $componentsUsed);
+
         return [
             'name' => $name,
             'title' => $this->extractTitle($crawler),
@@ -118,9 +122,11 @@ class Scraper
             'category' => $category,
             'url' => $this->baseUrl . $url,
             'pro' => $this->detectPro($crawler),
-            'sections' => $this->extractSections($crawler),
+            'sections' => $sections,
             'reference' => $this->extractReference($crawler),
             'related' => $this->extractRelated($crawler),
+            'components_used' => $componentsUsed,
+            'sub_components' => $subComponents,
             'scraped_at' => date('c'),
         ];
     }
@@ -384,5 +390,46 @@ class Scraper
 
         // Limit to reasonable number
         return array_slice($related, 0, 10);
+    }
+
+    /**
+     * Extract all flux:* component names from code examples.
+     */
+    private function extractComponentsFromExamples(array $sections): array
+    {
+        $components = [];
+
+        foreach ($sections as $section) {
+            foreach ($section['examples'] ?? [] as $example) {
+                // Match <flux:component-name or <flux:component.subname
+                if (preg_match_all('/<flux:([a-z][a-z0-9.-]*)/i', $example, $matches)) {
+                    $components = array_merge($components, $matches[1]);
+                }
+            }
+        }
+
+        // Remove duplicates and sort
+        $unique = array_unique($components);
+        sort($unique);
+
+        return array_values($unique);
+    }
+
+    /**
+     * Extract sub-components (e.g., modal.close, modal.trigger for modal).
+     */
+    private function extractSubComponents(string $parentName, array $componentsUsed): array
+    {
+        $subComponents = [];
+        $prefix = $parentName . '.';
+
+        foreach ($componentsUsed as $component) {
+            if (str_starts_with($component, $prefix)) {
+                $subComponents[] = $component;
+            }
+        }
+
+        sort($subComponents);
+        return $subComponents;
     }
 }

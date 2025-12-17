@@ -76,9 +76,10 @@ class UpdateCommand extends Command
             $repo->save($pluralCategory, $name, $doc);
             $this->info("Saved: {$name}");
 
-            // Rebuild index
+            // Rebuild indexes
             $repo->rebuildIndex();
-            $this->info('Search index updated.');
+            $repo->rebuildUsages();
+            $this->info('Search and usages indexes updated.');
         }
 
         return self::SUCCESS;
@@ -151,6 +152,9 @@ class UpdateCommand extends Command
         if (! $dryRun) {
             $this->info('Rebuilding search index...');
             $repo->rebuildIndex();
+
+            $this->info('Rebuilding component usages index...');
+            $repo->rebuildUsages();
         }
 
         $this->info("Update complete: {$success} succeeded, {$failed} failed");

@@ -233,6 +233,16 @@ class DocRepository
             }
         }
 
+        // Add components used in examples (enables finding pages by component usage)
+        if (! empty($doc['components_used'])) {
+            $keywords = array_merge($keywords, $doc['components_used']);
+        }
+
+        // Add sub-components
+        if (! empty($doc['sub_components'])) {
+            $keywords = array_merge($keywords, $doc['sub_components']);
+        }
+
         return array_values(array_unique($keywords));
     }
 
@@ -242,5 +252,130 @@ class DocRepository
     public function getDataPath(): string
     {
         return $this->dataPath;
+    }
+
+    /**
+     * Load the component usages index.
+     */
+    public function loadUsages(): ?array
+    {
+        $path = "{$this->dataPath}/usages.json";
+
+        if (! file_exists($path)) {
+            return null;
+        }
+
+        return json_decode(file_get_contents($path), true);
+    }
+
+    /**
+     * Save the component usages index.
+     */
+    public function saveUsages(array $usages): void
+    {
+        $path = "{$this->dataPath}/usages.json";
+        $json = json_encode($usages, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        file_put_contents($path, $json . "\n");
+    }
+
+    /**
+     * Rebuild the component usages index from all documentation files.
+     *
+     * Creates a reverse index: component -> pages where it's used in examples.
+     */
+    public function rebuildUsages(): array
+    {
+        $usages = [];
+
+        foreach (['components', 'layouts', 'guides'] as $category) {
+            foreach ($this->listCategory($category) as $name) {
+                $doc = $this->find($name, $category);
+
+                if (! $doc || empty($doc['components_used'])) {
+                    continue;
+                }
+
+                // Build reverse index: which pages use each component
+                foreach ($doc['components_used'] as $component) {
+                    if (! isset($usages[$component])) {
+                        $usages[$component] = [];
+                    }
+
+                    // Find which sections contain this component
+                    $sectionsWithComponent = [];
+                    foreach ($doc['sections'] ?? [] as $section) {
+                        foreach ($section['examples'] ?? [] as $example) {
+                            if (stripos($example, "<flux:{$component}") !== false) {
+                                $sectionsWithComponent[] = $section['title'];
+                            }
+                        }
+                    }
+
+                    $usages[$component][] = [
+                        'page' => $name,
+                        'category' => $category,
+                        'sections' => array_values(array_unique($sectionsWithComponent)),
+                    ];
+                }
+            }
+        }
+
+        // Sort by component name
+        ksort($usages);
+
+        $index = [
+            'version' => '1.0',
+            'updated_at' => date('c'),
+            'usages' => $usages,
+        ];
+
+        $this->saveUsages($index);
+        return $index;
+    }
+
+    /**
+     * Get all documented component names (those with their own pages).
+     */
+    public function getDocumentedComponents(): array
+    {
+        return $this->listCategory('components');
+    }
+
+    /**
+     * Find undocumented components (in examples but no dedicated page).
+     */
+    public function findUndocumentedComponents(): array
+    {
+        $documented = $this->getDocumentedComponents();
+        $usages = $this->loadUsages();
+
+        if (! $usages || empty($usages['usages'])) {
+            return [];
+        }
+
+        $undocumented = [];
+
+        foreach ($usages['usages'] as $component => $pages) {
+            // Check if component has its own documentation page
+            $baseName = explode('.', $component)[0]; // modal.close -> modal
+
+            if (! in_array($component, $documented) && ! in_array($baseName, $documented)) {
+                // Completely undocumented
+                $undocumented[$component] = [
+                    'type' => 'undocumented',
+                    'usages' => $pages,
+                ];
+            } elseif (str_contains($component, '.') && in_array($baseName, $documented)) {
+                // Sub-component of a documented parent
+                $undocumented[$component] = [
+                    'type' => 'sub_component',
+                    'parent' => $baseName,
+                    'usages' => $pages,
+                ];
+            }
+        }
+
+        ksort($undocumented);
+        return $undocumented;
     }
 }

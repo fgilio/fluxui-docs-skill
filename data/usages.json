@@ -1,0 +1,171 @@
+{
+    "version": "1.0",
+    "updated_at": "2025-12-17T11:42:03+00:00",
+    "usages": {
+        "button": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Header actions",
+                    "Simple card"
+                ]
+            },
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Data binding",
+                    "Confirmation",
+                    "Flyout"
+                ]
+            }
+        ],
+        "card": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Small card",
+                    "Header actions",
+                    "Simple card"
+                ]
+            }
+        ],
+        "heading": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Small card",
+                    "Header actions",
+                    "Simple card"
+                ]
+            },
+            {
+                "page": "heading",
+                "category": "components",
+                "sections": [
+                    "Sizes",
+                    "Heading level",
+                    "Examples"
+                ]
+            },
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Confirmation",
+                    "Flyout"
+                ]
+            }
+        ],
+        "icon": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Small card"
+                ]
+            }
+        ],
+        "icon.arrow-trending-up": [
+            {
+                "page": "heading",
+                "category": "components",
+                "sections": [
+                    "Examples"
+                ]
+            }
+        ],
+        "input": [
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Flyout"
+                ]
+            }
+        ],
+        "modal": [
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Unique modal names",
+                    "Livewire methods",
+                    "Data binding",
+                    "Close events",
+                    "Cancel events",
+                    "Disable click outside",
+                    "Confirmation",
+                    "Flyout",
+                    "Flyout positioning"
+                ]
+            }
+        ],
+        "modal.close": [
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Confirmation"
+                ]
+            }
+        ],
+        "modal.trigger": [
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Confirmation",
+                    "Flyout"
+                ]
+            }
+        ],
+        "spacer": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Header actions"
+                ]
+            },
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Confirmation",
+                    "Flyout"
+                ]
+            }
+        ],
+        "text": [
+            {
+                "page": "card",
+                "category": "components",
+                "sections": [
+                    "Small card",
+                    "Header actions",
+                    "Simple card"
+                ]
+            },
+            {
+                "page": "heading",
+                "category": "components",
+                "sections": [
+                    "Heading level",
+                    "Examples"
+                ]
+            },
+            {
+                "page": "modal",
+                "category": "components",
+                "sections": [
+                    "Confirmation",
+                    "Flyout"
+                ]
+            }
+        ]
+    }
+}
