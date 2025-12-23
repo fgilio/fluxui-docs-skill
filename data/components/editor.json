@@ -65,7 +65,7 @@
             "title": "Extensions",
             "content": "Tiptap has a wide range of extensions that can be used to add custom functionality to the editor.\nThe following extensions are already installed:",
             "examples": [
-                "<head> ... <script type=\"module\"> document.addEventListener('flux:editor', (e) => { ... }) </script></head>",
+                "<head> ... </head>",
                 "...document.addEventListener('flux:editor', (e) => { ...})",
                 "import Youtube from 'https://cdn.jsdelivr.net/npm/@tiptap/[email protected]/+esm'document.addEventListener('flux:editor', (e) => { e.detail.registerExtensions([ Youtube.configure({ controls: false, nocookie: true, }), ])})",
                 "document.addEventListener('flux:editor', (e) => { e.detail.disableExtension('underline')})",
@@ -155,5 +155,5 @@
         "editor.strike",
         "editor.toolbar"
     ],
-    "scraped_at": "2025-12-17T11:52:34+00:00"
+    "scraped_at": "2025-12-23T17:54:04+00:00"
 }

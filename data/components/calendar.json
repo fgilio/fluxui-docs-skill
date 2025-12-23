@@ -10,7 +10,7 @@
             "title": "Basic Usage",
             "content": "",
             "examples": [
-                "<flux:calendar value=\"2025-12-17\" />",
+                "<flux:calendar value=\"2025-12-23\" />",
                 "<flux:calendar wire:model=\"date\" />",
                 "<?phpuse Illuminate\\Support\\Carbon;use Livewire\\Component;class BookAppointment extends Component { public Carbon $date; public function mount() { $this->date = now(); }}"
             ]
@@ -59,14 +59,14 @@
             "title": "Static",
             "content": "Create a non-interactive calendar for display purposes.",
             "examples": [
-                "<flux:calendar static value=\"2025-12-17\" size=\"xs\" :navigation=\"false\"/>"
+                "<flux:calendar static value=\"2025-12-23\" size=\"xs\" :navigation=\"false\"/>"
             ]
         },
         {
             "title": "Min/max dates",
             "content": "Restrict the selectable date range by setting minimum and maximum boundaries.",
             "examples": [
-                "<flux:calendar max=\"2025-12-17\" />",
+                "<flux:calendar max=\"2025-12-23\" />",
                 "<!-- Prevent selection before today... --><flux:calendar min=\"today\" /><!-- Prevent selection after today... --><flux:calendar max=\"today\" />"
             ]
         },
@@ -74,7 +74,7 @@
             "title": "Unavailable dates",
             "content": "Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.",
             "examples": [
-                "<flux:calendar unavailable=\"2025-12-16,2025-12-18\" />"
+                "<flux:calendar unavailable=\"2025-12-22,2025-12-24\" />"
             ]
         },
         {
@@ -187,5 +187,5 @@
         "calendar"
     ],
     "sub_components": [],
-    "scraped_at": "2025-12-17T11:52:28+00:00"
+    "scraped_at": "2025-12-23T17:53:55+00:00"
 }

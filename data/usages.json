@@ -1,6 +1,6 @@
 {
     "version": "1.0",
-    "updated_at": "2025-12-17T11:52:55+00:00",
+    "updated_at": "2025-12-23T17:54:36+00:00",
     "usages": {
         "accordion": [
             {
@@ -392,6 +392,13 @@
                 ]
             },
             {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
                 "page": "popover",
                 "category": "components",
                 "sections": [
@@ -401,6 +408,13 @@
                     "Examples",
                     "Category picker",
                     "Feedback"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
                 ]
             },
             {
@@ -1580,6 +1594,13 @@
                 ]
             },
             {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
                 "page": "popover",
                 "category": "components",
                 "sections": [
@@ -1601,6 +1622,13 @@
                 "category": "components",
                 "sections": [
                     "Custom card content"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
                 ]
             },
             {
@@ -1969,6 +1997,20 @@
                 "sections": [
                     "Flyout",
                     "Floating flyout"
+                ]
+            },
+            {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
                 ]
             },
             {
@@ -2515,6 +2557,20 @@
                 ]
             },
             {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
                 "page": "patterns",
                 "category": "guides",
                 "sections": [
@@ -2899,7 +2955,24 @@
                     "Small",
                     "Searchable",
                     "Custom search placeholder",
-                    "With icons"
+                    "With icons",
+                    "Combobox",
+                    "Create option",
+                    "With backend search",
+                    "Loading message",
+                    "With validation",
+                    "With modal"
+                ]
+            }
+        ],
+        "pillbox.input": [
+            {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "Create option",
+                    "With backend search",
+                    "With validation"
                 ]
             }
         ],
@@ -2910,7 +2983,35 @@
                 "sections": [
                     "Small",
                     "Searchable",
-                    "With icons"
+                    "With icons",
+                    "Combobox",
+                    "Create option",
+                    "With backend search",
+                    "Loading message",
+                    "With validation",
+                    "With modal"
+                ]
+            }
+        ],
+        "pillbox.option.create": [
+            {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "Create option",
+                    "With backend search",
+                    "With validation",
+                    "With modal"
+                ]
+            }
+        ],
+        "pillbox.option.empty": [
+            {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With backend search",
+                    "Loading message"
                 ]
             }
         ],
@@ -3118,7 +3219,12 @@
                     "Clearing search",
                     "Combobox",
                     "The input slot",
-                    "Dynamic options"
+                    "Backend search",
+                    "Create option",
+                    "With backend search",
+                    "Loading message",
+                    "With validation",
+                    "With modal"
                 ]
             },
             {
@@ -3155,7 +3261,10 @@
                 "sections": [
                     "Combobox",
                     "The input slot",
-                    "Dynamic options"
+                    "Backend search",
+                    "Create option",
+                    "With backend search",
+                    "With validation"
                 ]
             }
         ],
@@ -3186,7 +3295,34 @@
                     "Searchable select",
                     "Multiple select",
                     "Combobox",
-                    "Dynamic options"
+                    "Backend search",
+                    "Create option",
+                    "With backend search",
+                    "Loading message",
+                    "With validation",
+                    "With modal"
+                ]
+            }
+        ],
+        "select.option.create": [
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "Create option",
+                    "With backend search",
+                    "With validation",
+                    "With modal"
+                ]
+            }
+        ],
+        "select.option.empty": [
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With backend search",
+                    "Loading message"
                 ]
             }
         ],
@@ -3515,6 +3651,20 @@
                 "sections": [
                     "Confirmation",
                     "Flyout"
+                ]
+            },
+            {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
                 ]
             },
             {
@@ -3875,6 +4025,13 @@
                 ]
             },
             {
+                "page": "pillbox",
+                "category": "components",
+                "sections": [
+                    "With modal"
+                ]
+            },
+            {
                 "page": "popover",
                 "category": "components",
                 "sections": [
@@ -3897,6 +4054,13 @@
                 "category": "components",
                 "sections": [
                     "Custom card content"
+                ]
+            },
+            {
+                "page": "select",
+                "category": "components",
+                "sections": [
+                    "With modal"
                 ]
             },
             {

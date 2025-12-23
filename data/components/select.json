@@ -106,10 +106,54 @@
             ]
         },
         {
-            "title": "Dynamic options",
+            "title": "Backend search",
             "content": "If you want to dynamically generate options on the server, you can use the :filter=\"false\" prop to disable client-side filtering.",
             "examples": [
                 "<flux:select wire:model=\"userId\" variant=\"combobox\" :filter=\"false\"> <x-slot name=\"input\"> <flux:select.input wire:model.live=\"search\" /> </x-slot> @foreach ($this->users as $user) <flux:select.option value=\"{{ $user->id }}\" wire:key=\"{{ $user->id }}\"> {{ $user->name }} </flux:select.option> @endforeach</flux:select><!--public $search = '';public $userId = null;#[\\Livewire\\Attributes\\Computed]public function users() { return \\App\\Models\\User::query() ->when($this->search, fn($query) => $query->where('name', 'like', '%' . $this->search . '%')) ->limit(20) ->get();}-->"
+            ]
+        },
+        {
+            "title": "Create option",
+            "content": "Allow users to the create new options using the <flux:select.option.create> component.\nFlux will automatically hide the create option when the search input matches an existing item in the list. You can also specify the minimum number of characters required for the create option to appear using the min-length prop.",
+            "examples": [
+                "<flux:select wire:model=\"projectId\" variant=\"combobox\"> <x-slot name=\"input\"> <flux:select.input wire:model=\"search\" placeholder=\"Start typing...\" /> </x-slot> @foreach ($this->projects as $project) <flux:select.option :wire:key=\"$project->id\">{{ $project->name }}</flux:select.option> @endforeach <flux:select.option.create wire:click=\"createProject\" min-length=\"2\"> Create \"<span wire:text=\"search\"></span>\" </flux:select.option.create></flux:select><!--public $search = '';public $projectId = null;public function createProject(){ $project = Project::create([ 'name' => $this->search, ]); $this->projectId = $project->id;}-->"
+            ]
+        },
+        {
+            "title": "With backend search",
+            "content": "If you're using :filter=\"false\", make sure to adjust your query to always include the newly created item when the search input is cleared.\nFlux will automatically disable the create option during requests to prevent duplicate entries and when the list is updated, it performs a uniqueness check on the frontend.",
+            "examples": [
+                "<flux:select wire:model=\"projectId\" variant=\"combobox\" :filter=\"false\"> <x-slot name=\"input\"> <flux:select.input wire:model.live=\"search\" placeholder=\"Start typing...\" /> </x-slot> @foreach($this->projects as $project) <flux:select.option :value=\"$project->id\">{{ $project->name }}</flux:select.option> @endforeach <flux:select.option.create wire:click=\"createProject\" min-length=\"2\"> Create \"<span wire:text=\"search\"></span>\" </flux:select.option.create></flux:select><!--#[\\Livewire\\Attributes\\Computed]public function projects() { return Project::query() ->where('name', 'like', '%' . trim($this->search) . '%') ->limit(20)->get() ->when(blank($this->search) && $this->projectId, function ($results) { return Project::query() ->whereIn('id', [$this->projectId]) ->whereNotIn('id', $results->pluck('id')) ->get()->merge($results); });}-->",
+                "public function createProject() { // Create logic... $this->search = '';}",
+                "<flux:select wire:model=\"projectId\" variant=\"combobox\" :filter=\"false\"> ... <x-slot name=\"empty\"> <flux:select.option.empty when-loading=\"Loading projects...\"> No projects found. </flux:select.option.empty> </x-slot></flux:select>"
+            ]
+        },
+        {
+            "title": "With listbox variant",
+            "content": "",
+            "examples": [
+                "public function createProject() { // Create logic... $this->search = '';}"
+            ]
+        },
+        {
+            "title": "Loading message",
+            "content": "",
+            "examples": [
+                "<flux:select wire:model=\"projectId\" variant=\"combobox\" :filter=\"false\"> ... <x-slot name=\"empty\"> <flux:select.option.empty when-loading=\"Loading projects...\"> No projects found. </flux:select.option.empty> </x-slot></flux:select>"
+            ]
+        },
+        {
+            "title": "With validation",
+            "content": "When you perform additional validation on the backend, the search input will indicate an invalid state when there are validation errors present. Make sure to reset the error bag when the user updates the input.",
+            "examples": [
+                "<flux:select wire:model=\"projectId\" variant=\"combobox\" :filter=\"false\"> <x-slot name=\"input\"> <flux:select.input wire:model.live=\"search\" placeholder=\"Start typing...\" /> </x-slot> ... <flux:select.option.create wire:click=\"createProject\" min-length=\"2\"> Create \"<span wire:text=\"search\"></span>\" </flux:select.option.create></flux:select><!--public function createProject() { $this->validate(['search' => 'required|unique:projects,name']); // Create logic...}public function updatedSearch() { $this->resetErrorBag('search');}-->"
+            ]
+        },
+        {
+            "title": "With modal",
+            "content": "Use the modal prop to specify a name of a modal and handle more complex creation workflows inside a form.\nEnter the name of the new project.",
+            "examples": [
+                "<flux:select wire:model=\"projectId\" variant=\"listbox\"> @foreach($this->projects as $project) <flux:select.option :value=\"$project->id\">{{ $project->name }}</flux:select.option> @endforeach <flux:select.option.create modal=\"create-project\">Create new</flux:select.option></flux:select><flux:modal name=\"create-project\" class=\"md:w-96\"> <form wire:submit=\"createProject\" class=\"space-y-6\"> <div> <flux:heading size=\"lg\">Create new project</flux:heading> <flux:text class=\"mt-2\">Enter the name of the new project.</flux:text> </div> <flux:input wire:model=\"projectName\" label=\"Name\" placeholder=\"e.g. 'UX Research'\" /> <div class=\"flex\"> <flux:spacer /> <flux:button type=\"submit\" variant=\"primary\">Create</flux:button> </div> </form></flux:modal>"
             ]
         },
         {
@@ -132,21 +176,31 @@
         "card"
     ],
     "components_used": [
+        "button",
+        "heading",
         "icon.eye",
         "icon.key",
         "icon.shield-check",
         "icon.user",
+        "input",
+        "modal",
         "select",
         "select.button",
         "select.input",
         "select.option",
-        "select.search"
+        "select.option.create",
+        "select.option.empty",
+        "select.search",
+        "spacer",
+        "text"
     ],
     "sub_components": [
         "select.button",
         "select.input",
         "select.option",
+        "select.option.create",
+        "select.option.empty",
         "select.search"
     ],
-    "scraped_at": "2025-12-17T11:52:42+00:00"
+    "scraped_at": "2025-12-23T17:54:17+00:00"
 }

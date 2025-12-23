@@ -10,7 +10,7 @@
             "title": "Data structure",
             "content": "",
             "examples": [
-                "<?phpuse Livewire\\Component;class Dashboard extends Component{ public array $data = [ ['date' => '2025-12-17', 'visitors' => 267], ['date' => '2025-12-16', 'visitors' => 259], ['date' => '2025-12-15', 'visitors' => 269], // ... ];}",
+                "<?phpuse Livewire\\Component;class Dashboard extends Component{ public array $data = [ ['date' => '2025-12-23', 'visitors' => 267], ['date' => '2025-12-22', 'visitors' => 259], ['date' => '2025-12-21', 'visitors' => 269], // ... ];}",
                 "<flux:chart wire:model=\"data\" />",
                 "<flux:chart :value=\"$this->data\" />",
                 "<flux:chart :value=\"[1, 2, 3, 4, 5]\" />"
@@ -225,5 +225,5 @@
         "chart.viewport",
         "chart.zero-line"
     ],
-    "scraped_at": "2025-12-17T11:52:30+00:00"
+    "scraped_at": "2025-12-23T17:53:58+00:00"
 }

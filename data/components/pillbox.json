@@ -36,6 +36,49 @@
             ]
         },
         {
+            "title": "Combobox",
+            "content": "Display an input directly within the pillbox.",
+            "examples": [
+                "<flux:pillbox variant=\"combobox\" multiple placeholder=\"Choose skills...\"> <flux:pillbox.option value=\"javascript\">JavaScript</flux:pillbox.option> <flux:pillbox.option value=\"typescript\">TypeScript</flux:pillbox.option> <flux:pillbox.option value=\"php\">PHP</flux:pillbox.option> <flux:pillbox.option value=\"python\">Python</flux:pillbox.option> <flux:pillbox.option value=\"ruby\">Ruby</flux:pillbox.option> <flux:pillbox.option value=\"go\">Go</flux:pillbox.option> <flux:pillbox.option value=\"rust\">Rust</flux:pillbox.option> <flux:pillbox.option value=\"java\">Java</flux:pillbox.option> <flux:pillbox.option value=\"csharp\">C#</flux:pillbox.option> <flux:pillbox.option value=\"swift\">Swift</flux:pillbox.option></flux:pillbox>"
+            ]
+        },
+        {
+            "title": "Create option",
+            "content": "Allow users to the create new options using the <flux:pillbox.option.create> component.\nFlux will automatically hide the create option when the search input matches an existing item in the list. You can also specify the minimum number of characters required for the create option to appear using the min-length prop.",
+            "examples": [
+                "<flux:pillbox wire:model=\"selectedTags\" variant=\"combobox\" multiple> <x-slot name=\"input\"> <flux:pillbox.input wire:model=\"search\" placeholder=\"Choose tags...\" /> </x-slot> @foreach ($this->tags as $tag) <flux:pillbox.option :value=\"$tag->id\">{{ $tag->name }}</flux:pillbox.option> @endforeach <flux:pillbox.option.create wire:click=\"createTag\" min-length=\"2\"> Create new \"<span wire:text=\"search\"></span>\" </flux:pillbox.option.create></flux:pillbox><!--public $search = '';public $selectedTags = [];public function createProject(){ $tag = Tag::create([ 'name' => $this->search, ]); $this->selectedTags[] = $tag->id; $this->search = '';}-->"
+            ]
+        },
+        {
+            "title": "With backend search",
+            "content": "If you're using :filter=\"false\", make sure to adjust your query to always include the newly created item when the search input is cleared.\nFlux will automatically disable the create option during requests to prevent duplicate entries and when the list is updated, it performs a uniqueness check on the frontend.",
+            "examples": [
+                "<flux:pillbox wire:model.live=\"selectedTags\" variant=\"combobox\" multiple :filter=\"false\"> <x-slot name=\"input\"> <flux:pillbox.input wire:model.live=\"search\" placeholder=\"Choose tags...\" /> </x-slot> @foreach($this->tags as $tag) <flux:pillbox.option :value=\"$tag->id\">{{ $tag->name }}</flux:pillbox.option> @endforeach <flux:pillbox.option.create wire:click=\"createTag\" min-length=\"2\"> Create \"<span wire:text=\"search\"></span>\" </flux:pillbox.option.create></flux:pillbox><!--#[\\Livewire\\Attributes\\Computed]public function tags() { return \\App\\Models\\Tag::query() ->where('name', 'like', '%' . trim($this->search) . '%') ->limit(20)->get() ->when(blank($this->search) && $this->selectedTags, function ($results) { return \\App\\Models\\Tag::query() ->whereIn('id', $this->selectedTags) ->whereNotIn('id', $results->pluck('id')) ->get()->merge($results); });}-->",
+                "<flux:pillbox wire:model=\"selectedTags\" variant=\"combobox\" multiple :filter=\"false\"> ... <x-slot name=\"empty\"> <flux:pillbox.option.empty when-loading=\"Loading tags...\"> No tags found. </flux:pillbox.option.empty> </x-slot></flux:pillbox>"
+            ]
+        },
+        {
+            "title": "Loading message",
+            "content": "",
+            "examples": [
+                "<flux:pillbox wire:model=\"selectedTags\" variant=\"combobox\" multiple :filter=\"false\"> ... <x-slot name=\"empty\"> <flux:pillbox.option.empty when-loading=\"Loading tags...\"> No tags found. </flux:pillbox.option.empty> </x-slot></flux:pillbox>"
+            ]
+        },
+        {
+            "title": "With validation",
+            "content": "When you perform additional validation on the backend, the search input will indicate an invalid state when there are validation errors present. Make sure to reset the error bag when the user updates the input.",
+            "examples": [
+                "<flux:pillbox wire:model.live=\"selectedTags\" variant=\"combobox\" multiple placeholder=\"Choose tags...\" :filter=\"false\"> <x-slot name=\"input\"> <flux:pillbox.input wire:model.live=\"search\" placeholder=\"Choose tags...\" /> </x-slot> ... <flux:pillbox.option.create wire:click=\"createTag\" min-length=\"2\"> Create \"<span wire:text=\"search\"></span>\" </flux:pillbox.option.create></flux:pillbox><!--public function createTag() { $this->validate(['search' => 'required|unique:tags,name']); // Create logic...}public function updatedSearch() { $this->resetErrorBag('search');}-->"
+            ]
+        },
+        {
+            "title": "With modal",
+            "content": "Use the modal prop to specify a name of a modal and handle more complex creation workflows inside a form.\nEnter the name of the new tag.",
+            "examples": [
+                "<flux:pillbox wire:model=\"projectId\" variant=\"combobox\" placeholder=\"Choose project...\"> <flux:pillbox.option.create modal=\"create-tag\">Create new</flux:pillbox.option> @foreach($this->tags as $tag) <flux:pillbox.option :value=\"$tag->id\">{{ $tag->name }}</flux:pillbox.option> @endforeach</flux:pillbox><flux:modal name=\"create-tag\" class=\"md:w-96\"> <form wire:submit=\"createTag\" class=\"space-y-6\"> <div> <flux:heading size=\"lg\">Create new tag</flux:heading> <flux:text class=\"mt-2\">Enter the name of the new tag.</flux:text> </div> <flux:input wire:model=\"newTagName\" label=\"Name\" placeholder=\"e.g. 'Research'\" /> <div class=\"flex\"> <flux:spacer /> <flux:button type=\"submit\" variant=\"primary\">Create</flux:button> </div> </form></flux:modal>"
+            ]
+        },
+        {
             "title": "Related components",
             "content": "Single and multi-select dropdowns\nStructured form field with label and validation states\nEnhanced text input with predictive suggestions",
             "examples": []
@@ -55,14 +98,26 @@
         "card"
     ],
     "components_used": [
+        "button",
+        "heading",
         "icon.cloud",
         "icon.code-bracket",
         "icon.server",
+        "input",
+        "modal",
         "pillbox",
-        "pillbox.option"
+        "pillbox.input",
+        "pillbox.option",
+        "pillbox.option.create",
+        "pillbox.option.empty",
+        "spacer",
+        "text"
     ],
     "sub_components": [
-        "pillbox.option"
+        "pillbox.input",
+        "pillbox.option",
+        "pillbox.option.create",
+        "pillbox.option.empty"
     ],
-    "scraped_at": "2025-12-17T11:52:39+00:00"
+    "scraped_at": "2025-12-23T17:54:14+00:00"
 }

@@ -1,6 +1,6 @@
 {
     "version": "1.0",
-    "updated_at": "2025-12-17T11:52:55+00:00",
+    "updated_at": "2025-12-23T17:54:36+00:00",
     "items": [
         {
             "name": "accordion",
@@ -1026,11 +1026,25 @@
                 "searchable",
                 "custom search placeholder",
                 "with icons",
+                "combobox",
+                "create option",
+                "with backend search",
+                "loading message",
+                "with validation",
+                "with modal",
                 "related components",
+                "heading",
                 "icon.cloud",
                 "icon.code-bracket",
                 "icon.server",
-                "pillbox.option"
+                "input",
+                "modal",
+                "pillbox.input",
+                "pillbox.option",
+                "pillbox.option.create",
+                "pillbox.option.empty",
+                "spacer",
+                "text"
             ]
         },
         {
@@ -1186,16 +1200,29 @@
                 "clearing search",
                 "combobox",
                 "the input slot",
-                "dynamic options",
+                "backend search",
+                "create option",
+                "with backend search",
+                "with listbox variant",
+                "loading message",
+                "with validation",
+                "with modal",
                 "related components",
+                "heading",
                 "icon.eye",
                 "icon.key",
                 "icon.shield-check",
                 "icon.user",
+                "input",
+                "modal",
                 "select.button",
                 "select.input",
                 "select.option",
-                "select.search"
+                "select.option.create",
+                "select.option.empty",
+                "select.search",
+                "spacer",
+                "text"
             ]
         },
         {

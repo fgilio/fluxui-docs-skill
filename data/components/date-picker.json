@@ -10,7 +10,7 @@
             "title": "Basic usage",
             "content": "",
             "examples": [
-                "<flux:date-picker value=\"2025-12-17\" />",
+                "<flux:date-picker value=\"2025-12-23\" />",
                 "<flux:date-picker wire:model=\"date\" />",
                 "<?phpuse Illuminate\\Support\\Carbon;use Livewire\\Component;use App\\Models\\Post;class CreatePost extends Component { public ?Carbon $date; public function save() { Post::create([ // ... 'published_at' => $this->date, ]) // ... }}"
             ]
@@ -87,7 +87,7 @@
             "title": "Unavailable dates",
             "content": "Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.",
             "examples": [
-                "<flux:date-picker unavailable=\"2025-12-16,2025-12-18\" />"
+                "<flux:date-picker unavailable=\"2025-12-22,2025-12-24\" />"
             ]
         },
         {
@@ -219,5 +219,5 @@
     "sub_components": [
         "date-picker.input"
     ],
-    "scraped_at": "2025-12-17T11:52:33+00:00"
+    "scraped_at": "2025-12-23T17:54:02+00:00"
 }
