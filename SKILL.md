@@ -15,11 +15,11 @@ Offline Flux UI documentation with JSON output for Claude Code integration.
 
 | Command | Purpose |
 |---------|---------|
-| `~/.claude/skills/fluxui-docs/fluxui-docs docs` | List all components, layouts, guides |
-| `~/.claude/skills/fluxui-docs/fluxui-docs search <query>` | Fuzzy search documentation |
-| `~/.claude/skills/fluxui-docs/fluxui-docs show <name>` | Display full documentation |
-| `~/.claude/skills/fluxui-docs/fluxui-docs usages <component>` | Find where a component is used |
-| `~/.claude/skills/fluxui-docs/fluxui-docs discover` | List undocumented components |
+| `fluxui-docs docs` | List all components, layouts, guides |
+| `fluxui-docs search <query>` | Fuzzy search documentation |
+| `fluxui-docs show <name>` | Display full documentation |
+| `fluxui-docs usages <component>` | Find where a component is used |
+| `fluxui-docs discover` | List undocumented components |
 
 ## Commands
 
@@ -28,9 +28,9 @@ Offline Flux UI documentation with JSON output for Claude Code integration.
 List available documentation items.
 
 ```bash
-~/.claude/skills/fluxui-docs/fluxui-docs docs                          # List all
-~/.claude/skills/fluxui-docs/fluxui-docs docs --category=components    # Components only
-~/.claude/skills/fluxui-docs/fluxui-docs docs --json                   # JSON output
+fluxui-docs docs                          # List all
+fluxui-docs docs --category=components    # Components only
+fluxui-docs docs --json                   # JSON output
 ```
 
 ### fluxui-docs search
@@ -38,9 +38,9 @@ List available documentation items.
 Search documentation by name or description.
 
 ```bash
-~/.claude/skills/fluxui-docs/fluxui-docs search button                 # Search for button
-~/.claude/skills/fluxui-docs/fluxui-docs search "date picker"          # Search phrase
-~/.claude/skills/fluxui-docs/fluxui-docs search input --json           # JSON output
+fluxui-docs search button                 # Search for button
+fluxui-docs search "date picker"          # Search phrase
+fluxui-docs search input --json           # JSON output
 ```
 
 ### fluxui-docs show
@@ -48,9 +48,9 @@ Search documentation by name or description.
 Display full documentation for an item.
 
 ```bash
-~/.claude/skills/fluxui-docs/fluxui-docs show button                   # Show button docs
-~/.claude/skills/fluxui-docs/fluxui-docs show modal --section=props    # Show specific section
-~/.claude/skills/fluxui-docs/fluxui-docs show dropdown --json          # JSON output
+fluxui-docs show button                   # Show button docs
+fluxui-docs show modal --section=props    # Show specific section
+fluxui-docs show dropdown --json          # JSON output
 ```
 
 ### fluxui-docs usages
@@ -58,9 +58,9 @@ Display full documentation for an item.
 Find where a component is used in documentation examples. Works for any component, including undocumented ones like `flux:subheading`.
 
 ```bash
-~/.claude/skills/fluxui-docs/fluxui-docs usages subheading             # Find subheading usage
-~/.claude/skills/fluxui-docs/fluxui-docs usages modal.close            # Find sub-component usage
-~/.claude/skills/fluxui-docs/fluxui-docs usages button --json          # JSON output
+fluxui-docs usages subheading             # Find subheading usage
+fluxui-docs usages modal.close            # Find sub-component usage
+fluxui-docs usages button --json          # JSON output
 ```
 
 Example output:
@@ -79,8 +79,8 @@ Total: 1 page(s)
 List components found in code examples but without their own documentation page. Surfaces "hidden" components.
 
 ```bash
-~/.claude/skills/fluxui-docs/fluxui-docs discover                      # List all undocumented
-~/.claude/skills/fluxui-docs/fluxui-docs discover --json               # JSON output
+fluxui-docs discover                      # List all undocumented
+fluxui-docs discover --json               # JSON output
 ```
 
 Example output:
@@ -112,13 +112,13 @@ Summary:
 
 ```bash
 # Find form components
-~/.claude/skills/fluxui-docs/fluxui-docs search form
+fluxui-docs search form
 
 # Get button variants
-~/.claude/skills/fluxui-docs/fluxui-docs show button
+fluxui-docs show button
 
 # List all components
-~/.claude/skills/fluxui-docs/fluxui-docs docs --category=components
+fluxui-docs docs --category=components
 ```
 
 ## Data Location
