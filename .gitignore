@@ -9,6 +9,7 @@
 .env
 
 # Build artifacts in src/
+src/vendor/
 /src/vendor/
 /src/buildroot/
 /src/builds/
