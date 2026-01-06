@@ -4,6 +4,7 @@ namespace App\Commands;
 
 use App\Services\Analytics;
 use App\Services\DocRepository;
+use Fgilio\AgentSkillFoundation\Console\AgentCommand;
 use LaravelZero\Framework\Commands\Command;
 
 /**
@@ -14,6 +15,7 @@ use LaravelZero\Framework\Commands\Command;
  */
 class ShowCommand extends Command
 {
+    use AgentCommand;
     protected $signature = 'show
         {name : Component, layout, or guide name}
         {--section= : Show specific section only}
@@ -28,18 +30,24 @@ class ShowCommand extends Command
         $doc = $repo->find($name);
 
         if (! $doc) {
+            $suggestions = $repo->suggest($name, 5);
+            $analytics->track('show', self::FAILURE, ['item' => $name, 'found' => false], $startTime);
+
+            if ($this->wantsJson()) {
+                return $this->jsonError("Not found: {$name}", [
+                    'suggestions' => $suggestions,
+                ]);
+            }
+
             $this->error("Not found: {$name}");
             $this->newLine();
 
-            $suggestions = $repo->suggest($name, 5);
             if (! empty($suggestions)) {
                 $this->line('Did you mean:');
                 foreach ($suggestions as $suggestion) {
                     $this->line("  - {$suggestion}");
                 }
             }
-
-            $analytics->track('show', self::FAILURE, ['item' => $name, 'found' => false], $startTime);
 
             return self::FAILURE;
         }
