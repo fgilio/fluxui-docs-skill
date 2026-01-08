@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\Analytics;
@@ -50,8 +52,8 @@ class ListCommand extends Command
                 continue;
             }
 
-            $this->info(ucfirst($cat) . ' (' . count($names) . ')');
-            $this->line('  ' . implode(', ', $names));
+            $this->info(ucfirst($cat).' ('.count($names).')');
+            $this->line('  '.implode(', ', $names));
             $this->newLine();
 
             $totalCount += count($names);

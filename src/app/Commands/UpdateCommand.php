@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\DocRepository;
 use App\Services\Scraper;
 use LaravelZero\Framework\Commands\Command;
+
 use function Laravel\Prompts\progress;
 
 /**
@@ -55,6 +58,7 @@ class UpdateCommand extends Command
         if (! $category) {
             $this->error("Could not determine category for: {$name}");
             $this->line('Use --category=component|layout|guide to specify');
+
             return self::FAILURE;
         }
 
@@ -64,6 +68,7 @@ class UpdateCommand extends Command
 
         if (! $doc) {
             $this->error("Failed to scrape: {$name}");
+
             return self::FAILURE;
         }
 
@@ -100,10 +105,11 @@ class UpdateCommand extends Command
 
         if (empty($items)) {
             $this->error('No items discovered. Check network connection.');
+
             return self::FAILURE;
         }
 
-        $this->info('Found ' . count($items) . ' items to scrape.');
+        $this->info('Found '.count($items).' items to scrape.');
         $this->newLine();
 
         if ($dryRun) {

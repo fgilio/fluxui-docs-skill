@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
+
+use Phar;
 
 /**
  * Repository for reading and writing Flux UI documentation JSON files.
@@ -15,21 +19,6 @@ class DocRepository
     public function __construct()
     {
         $this->dataPath = $this->resolveDataPath();
-    }
-
-    /**
-     * Resolve the data directory path relative to the binary.
-     */
-    private function resolveDataPath(): string
-    {
-        // When running from PHAR, look for sibling data/ directory
-        if (\Phar::running()) {
-            $pharPath = \Phar::running(false);
-            return dirname($pharPath) . '/data';
-        }
-
-        // Development: go up from src/ to skill root
-        return dirname(__DIR__, 3) . '/data';
     }
 
     /**
@@ -51,28 +40,6 @@ class DocRepository
     }
 
     /**
-     * List all items in a category.
-     */
-    private function listCategory(string $category): array
-    {
-        $path = "{$this->dataPath}/{$category}";
-
-        if (! is_dir($path)) {
-            return [];
-        }
-
-        $files = glob("{$path}/*.json");
-        $names = [];
-
-        foreach ($files as $file) {
-            $names[] = basename($file, '.json');
-        }
-
-        sort($names);
-        return $names;
-    }
-
-    /**
      * Find a documentation item by name.
      *
      * Searches all categories if not specified.
@@ -88,6 +55,7 @@ class DocRepository
 
             if (file_exists($path)) {
                 $content = file_get_contents($path);
+
                 return json_decode($content, true);
             }
         }
@@ -108,7 +76,7 @@ class DocRepository
 
         $path = "{$dir}/{$name}.json";
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        file_put_contents($path, $json . "\n");
+        file_put_contents($path, $json."\n");
     }
 
     /**
@@ -120,11 +88,12 @@ class DocRepository
         $suggestions = [];
 
         foreach ($all as $item) {
-            $distance = levenshtein(strtolower($name), strtolower($item));
+            $distance = levenshtein(mb_strtolower($name), mb_strtolower($item));
             $suggestions[$item] = $distance;
         }
 
         asort($suggestions);
+
         return array_slice(array_keys($suggestions), 0, $limit);
     }
 
@@ -163,7 +132,7 @@ class DocRepository
     {
         $path = "{$this->dataPath}/index.json";
         $json = json_encode($index, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        file_put_contents($path, $json . "\n");
+        file_put_contents($path, $json."\n");
     }
 
     /**
@@ -197,53 +166,8 @@ class DocRepository
         ];
 
         $this->saveIndex($index);
+
         return $index;
-    }
-
-    /**
-     * Extract searchable keywords from a doc.
-     */
-    private function extractKeywords(array $doc): array
-    {
-        $keywords = [];
-
-        // Add title words
-        if (! empty($doc['title'])) {
-            $keywords = array_merge($keywords, explode(' ', strtolower($doc['title'])));
-        }
-
-        // Add related components
-        if (! empty($doc['related'])) {
-            $keywords = array_merge($keywords, $doc['related']);
-        }
-
-        // Add section titles
-        foreach ($doc['sections'] ?? [] as $section) {
-            if (! empty($section['title'])) {
-                $keywords[] = strtolower($section['title']);
-            }
-        }
-
-        // Add prop names from reference
-        foreach ($doc['reference'] ?? [] as $component => $ref) {
-            foreach ($ref['props'] ?? [] as $prop) {
-                if (! empty($prop['name'])) {
-                    $keywords[] = strtolower($prop['name']);
-                }
-            }
-        }
-
-        // Add components used in examples (enables finding pages by component usage)
-        if (! empty($doc['components_used'])) {
-            $keywords = array_merge($keywords, $doc['components_used']);
-        }
-
-        // Add sub-components
-        if (! empty($doc['sub_components'])) {
-            $keywords = array_merge($keywords, $doc['sub_components']);
-        }
-
-        return array_values(array_unique($keywords));
     }
 
     /**
@@ -275,7 +199,7 @@ class DocRepository
     {
         $path = "{$this->dataPath}/usages.json";
         $json = json_encode($usages, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        file_put_contents($path, $json . "\n");
+        file_put_contents($path, $json."\n");
     }
 
     /**
@@ -305,7 +229,7 @@ class DocRepository
                     $sectionsWithComponent = [];
                     foreach ($doc['sections'] ?? [] as $section) {
                         foreach ($section['examples'] ?? [] as $example) {
-                            if (stripos($example, "<flux:{$component}") !== false) {
+                            if (mb_stripos($example, "<flux:{$component}") !== false) {
                                 $sectionsWithComponent[] = $section['title'];
                             }
                         }
@@ -330,6 +254,7 @@ class DocRepository
         ];
 
         $this->saveUsages($index);
+
         return $index;
     }
 
@@ -376,6 +301,92 @@ class DocRepository
         }
 
         ksort($undocumented);
+
         return $undocumented;
+    }
+
+    /**
+     * Resolve the data directory path relative to the binary.
+     */
+    private function resolveDataPath(): string
+    {
+        // When running from PHAR, look for sibling data/ directory
+        if (Phar::running()) {
+            $pharPath = Phar::running(false);
+
+            return dirname($pharPath).'/data';
+        }
+
+        // Development: go up from src/ to skill root
+        return dirname(__DIR__, 3).'/data';
+    }
+
+    /**
+     * List all items in a category.
+     */
+    private function listCategory(string $category): array
+    {
+        $path = "{$this->dataPath}/{$category}";
+
+        if (! is_dir($path)) {
+            return [];
+        }
+
+        $files = glob("{$path}/*.json");
+        $names = [];
+
+        foreach ($files as $file) {
+            $names[] = basename($file, '.json');
+        }
+
+        sort($names);
+
+        return $names;
+    }
+
+    /**
+     * Extract searchable keywords from a doc.
+     */
+    private function extractKeywords(array $doc): array
+    {
+        $keywords = [];
+
+        // Add title words
+        if (! empty($doc['title'])) {
+            $keywords = array_merge($keywords, explode(' ', mb_strtolower($doc['title'])));
+        }
+
+        // Add related components
+        if (! empty($doc['related'])) {
+            $keywords = array_merge($keywords, $doc['related']);
+        }
+
+        // Add section titles
+        foreach ($doc['sections'] ?? [] as $section) {
+            if (! empty($section['title'])) {
+                $keywords[] = mb_strtolower($section['title']);
+            }
+        }
+
+        // Add prop names from reference
+        foreach ($doc['reference'] ?? [] as $component => $ref) {
+            foreach ($ref['props'] ?? [] as $prop) {
+                if (! empty($prop['name'])) {
+                    $keywords[] = mb_strtolower($prop['name']);
+                }
+            }
+        }
+
+        // Add components used in examples (enables finding pages by component usage)
+        if (! empty($doc['components_used'])) {
+            $keywords = array_merge($keywords, $doc['components_used']);
+        }
+
+        // Add sub-components
+        if (! empty($doc['sub_components'])) {
+            $keywords = array_merge($keywords, $doc['sub_components']);
+        }
+
+        return array_values(array_unique($keywords));
     }
 }

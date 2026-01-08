@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\Analytics;
@@ -64,9 +66,9 @@ class SearchCommand extends Command
             }
 
             return [
-                $name . $context,
+                $name.$context,
                 $result['category'],
-                mb_substr($result['description'] ?? '', 0, 40) . (strlen($result['description'] ?? '') > 40 ? '...' : '') . $pro,
+                mb_substr($result['description'] ?? '', 0, 40).(mb_strlen($result['description'] ?? '') > 40 ? '...' : '').$pro,
             ];
         }, $results);
 

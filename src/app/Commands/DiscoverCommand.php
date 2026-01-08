@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\Analytics;
@@ -83,7 +85,7 @@ class DiscoverCommand extends Command
 
                 $this->comment("  flux:{$component}");
                 $this->line("    → see: {$parent}");
-                $this->line("    → used in: " . implode(', ', array_unique($pages)));
+                $this->line('    → used in: '.implode(', ', array_unique($pages)));
             }
 
             $this->newLine();
@@ -99,7 +101,7 @@ class DiscoverCommand extends Command
                 $pages = array_column($data['usages'], 'page');
 
                 $this->comment("  flux:{$component}");
-                $this->line("    → used in: " . implode(', ', array_unique($pages)));
+                $this->line('    → used in: '.implode(', ', array_unique($pages)));
             }
 
             $this->newLine();
@@ -109,7 +111,7 @@ class DiscoverCommand extends Command
         $totalSub = count($subComponents);
         $totalUndoc = count($noDocumentation);
 
-        $this->line("Summary:");
+        $this->line('Summary:');
         $this->line("  Sub-components: {$totalSub}");
         $this->line("  Undocumented: {$totalUndoc}");
         $this->newLine();

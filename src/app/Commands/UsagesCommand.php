@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\Analytics;
@@ -23,7 +25,7 @@ class UsagesCommand extends Command
     public function handle(DocRepository $repo, Analytics $analytics): int
     {
         $startTime = microtime(true);
-        $component = strtolower($this->argument('component'));
+        $component = mb_strtolower($this->argument('component'));
 
         // Remove flux: prefix if provided
         $component = preg_replace('/^flux:/', '', $component);
@@ -101,7 +103,7 @@ class UsagesCommand extends Command
         $hasOwnDocs = $repo->find($component) !== null;
 
         if ($hasOwnDocs) {
-            $this->line("  Note: This component has its own documentation page.");
+            $this->line('  Note: This component has its own documentation page.');
             $this->line("  Run \"fluxui-docs show {$component}\" for full details.");
             $this->newLine();
         }
@@ -121,7 +123,7 @@ class UsagesCommand extends Command
         }
 
         $this->newLine();
-        $this->line("Total: " . count($usages) . " page(s)");
+        $this->line('Total: '.count($usages).' page(s)');
     }
 
     /**
@@ -139,6 +141,7 @@ class UsagesCommand extends Command
         }
 
         asort($distances);
+
         return array_slice(array_keys($distances), 0, $limit);
     }
 }

@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "fgilio/agent-skill-foundation": "^0.4",
+        "php": "^8.3",
+        "fgilio/agent-skill-foundation": "^0.5",
         "laravel-zero/framework": "^12.0.2"
     },
     "require-dev": {
@@ -25,8 +25,14 @@
         "laravel/pint": "^1.25.1",
         "mockery/mockery": "^1.6.12",
         "pestphp/pest": "^3.8.4|^4.1.2",
+        "phpstan/phpstan": "^2.1",
         "symfony/css-selector": "^7.4",
         "symfony/dom-crawler": "^7.4"
+    },
+    "scripts": {
+        "lint": "pint",
+        "test:lint": "pint --test",
+        "test:types": "phpstan analyse"
     },
     "autoload": {
         "psr-4": {

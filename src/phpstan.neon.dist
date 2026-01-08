@@ -1,0 +1,12 @@
+parameters:
+    level: 6
+    paths:
+        - app
+
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: return.unusedType
+        - identifier: nullCoalesce.offset
+        - identifier: arrayValues.list

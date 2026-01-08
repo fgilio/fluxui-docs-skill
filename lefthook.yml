@@ -1,0 +1,12 @@
+pre-commit:
+  commands:
+    pint:
+      glob: "*.php"
+      root: "src/"
+      run: ./vendor/bin/pint {staged_files} && git add {staged_files}
+
+pre-push:
+  commands:
+    phpstan:
+      root: "src/"
+      run: composer test:types

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Commands;
 
 use App\Services\Analytics;
@@ -16,6 +18,7 @@ use LaravelZero\Framework\Commands\Command;
 class ShowCommand extends Command
 {
     use AgentCommand;
+
     protected $signature = 'show
         {name : Component, layout, or guide name}
         {--section= : Show specific section only}
@@ -86,7 +89,7 @@ class ShowCommand extends Command
 
         // Sections
         foreach ($doc['sections'] ?? [] as $s) {
-            if ($section && strtolower($s['title']) !== strtolower($section)) {
+            if ($section && mb_strtolower($s['title']) !== mb_strtolower($section)) {
                 continue;
             }
 
@@ -107,7 +110,7 @@ class ShowCommand extends Command
         }
 
         // Reference section
-        if (! empty($doc['reference']) && (! $section || strtolower($section) === 'reference')) {
+        if (! empty($doc['reference']) && (! $section || mb_strtolower($section) === 'reference')) {
             $this->renderReference($doc['reference']);
         }
 

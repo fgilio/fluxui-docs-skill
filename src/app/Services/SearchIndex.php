@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 /**
@@ -27,7 +29,7 @@ class SearchIndex
             return [];
         }
 
-        $query = strtolower(trim($query));
+        $query = mb_strtolower(trim($query));
         $results = [];
 
         foreach ($index['items'] as $item) {
@@ -39,7 +41,7 @@ class SearchIndex
         }
 
         // Sort by score descending
-        usort($results, fn($a, $b) => $b['score'] <=> $a['score']);
+        usort($results, fn ($a, $b) => $b['score'] <=> $a['score']);
 
         return array_slice($results, 0, $limit);
     }
@@ -53,9 +55,9 @@ class SearchIndex
     {
         $score = 0;
         $matchSource = null;
-        $name = strtolower($item['name'] ?? '');
-        $title = strtolower($item['title'] ?? '');
-        $description = strtolower($item['description'] ?? '');
+        $name = mb_strtolower($item['name'] ?? '');
+        $title = mb_strtolower($item['title'] ?? '');
+        $description = mb_strtolower($item['description'] ?? '');
         $keywords = array_map('strtolower', $item['keywords'] ?? []);
 
         // Exact name match - highest priority

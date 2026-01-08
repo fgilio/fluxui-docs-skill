@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -15,6 +18,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class Scraper
 {
     private Client $client;
+
     private string $baseUrl = 'https://fluxui.dev';
 
     public function __construct()
@@ -83,19 +87,6 @@ class Scraper
     }
 
     /**
-     * Check if an item already exists in the list.
-     */
-    private function isDuplicate(array $items, string $name, string $category): bool
-    {
-        foreach ($items as $item) {
-            if ($item['name'] === $name && $item['category'] === $category) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Scrape a single documentation page.
      */
     public function scrape(string $category, string $name): ?array
@@ -120,7 +111,7 @@ class Scraper
             'title' => $this->extractTitle($crawler),
             'description' => $this->extractDescription($crawler),
             'category' => $category,
-            'url' => $this->baseUrl . $url,
+            'url' => $this->baseUrl.$url,
             'pro' => $this->detectPro($crawler),
             'sections' => $sections,
             'reference' => $this->extractReference($crawler),
@@ -132,6 +123,20 @@ class Scraper
     }
 
     /**
+     * Check if an item already exists in the list.
+     */
+    private function isDuplicate(array $items, string $name, string $category): bool
+    {
+        foreach ($items as $item) {
+            if ($item['name'] === $name && $item['category'] === $category) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Build the URL for a documentation page.
      */
     private function buildUrl(string $category, string $name): string
@@ -140,7 +145,7 @@ class Scraper
             'component' => "/components/{$name}",
             'layout' => "/layouts/{$name}",
             'guide' => "/docs/{$name}",
-            default => throw new \InvalidArgumentException("Unknown category: {$category}"),
+            default => throw new InvalidArgumentException("Unknown category: {$category}"),
         };
     }
 
@@ -150,6 +155,7 @@ class Scraper
     private function extractTitle(Crawler $crawler): string
     {
         $h1 = $crawler->filter('h1')->first();
+
         return $h1->count() > 0 ? trim($h1->text()) : '';
     }
 
@@ -170,7 +176,7 @@ class Scraper
             $p = $crawler->filter($selector)->first();
             if ($p->count() > 0) {
                 $text = trim($p->text());
-                if (strlen($text) > 20) {
+                if (mb_strlen($text) > 20) {
                     return $text;
                 }
             }
@@ -196,7 +202,7 @@ class Scraper
         ];
 
         foreach ($proIndicators as $indicator) {
-            if (stripos($html, $indicator) !== false) {
+            if (mb_stripos($html, $indicator) !== false) {
                 return true;
             }
         }
@@ -220,12 +226,12 @@ class Scraper
             $node = $heading->getNode(0);
 
             // Skip Reference section - handled separately
-            if (strtolower($title) === 'reference') {
+            if (mb_strtolower($title) === 'reference') {
                 return;
             }
 
             // Skip h3s that are component names in Reference section (e.g., "flux:modal")
-            if ($node && $node->nodeName === 'h3' && str_starts_with(strtolower($title), 'flux:')) {
+            if ($node && $node->nodeName === 'h3' && str_starts_with(mb_strtolower($title), 'flux:')) {
                 return;
             }
 
@@ -251,6 +257,7 @@ class Scraper
                     $this->extractSectionContent($parentCrawler, $section);
                     $section['content'] = trim($section['content']);
                     $sections[] = $section;
+
                     return;
                 }
             }
@@ -286,8 +293,8 @@ class Scraper
         // Extract paragraphs
         $crawler->filter('p')->each(function (Crawler $p) use (&$section) {
             $text = trim($p->text());
-            if ($text && strlen($text) > 5) {
-                $section['content'] .= $text . "\n";
+            if ($text && mb_strlen($text) > 5) {
+                $section['content'] .= $text."\n";
             }
         });
 
@@ -309,7 +316,7 @@ class Scraper
 
         // Find h2 with "Reference" text
         $refH2 = $crawler->filter('h2')->reduce(function (Crawler $node) {
-            return strtolower(trim($node->text())) === 'reference';
+            return mb_strtolower(trim($node->text())) === 'reference';
         })->first();
 
         if ($refH2->count() === 0) {
@@ -362,7 +369,7 @@ class Scraper
     {
         $headers = [];
         $table->filter('thead th, thead td')->each(function (Crawler $th) use (&$headers) {
-            $headers[] = strtolower(trim($th->text()));
+            $headers[] = mb_strtolower(trim($th->text()));
         });
 
         // Determine table type from headers
@@ -370,7 +377,7 @@ class Scraper
         $isSlotTable = in_array('slot', $headers);
         $isAttrTable = in_array('attribute', $headers) || in_array('data attribute', $headers);
 
-        $table->filter('tbody tr')->each(function (Crawler $row) use (&$ref, $isPropTable, $isSlotTable, $isAttrTable, $headers) {
+        $table->filter('tbody tr')->each(function (Crawler $row) use (&$ref, $isPropTable, $isSlotTable, $isAttrTable) {
             $cells = [];
             $row->filter('td')->each(function (Crawler $td) use (&$cells) {
                 $cells[] = trim($td->text());
@@ -452,7 +459,7 @@ class Scraper
     private function extractSubComponents(string $parentName, array $componentsUsed): array
     {
         $subComponents = [];
-        $prefix = $parentName . '.';
+        $prefix = $parentName.'.';
 
         foreach ($componentsUsed as $component) {
             if (str_starts_with($component, $prefix)) {
@@ -461,6 +468,7 @@ class Scraper
         }
 
         sort($subComponents);
+
         return $subComponents;
     }
 }
