@@ -4,7 +4,9 @@ description: >
   Livewire Flux UI component documentation lookup.
   Provides offline access to fluxui.dev documentation via CLI.
   Use for: component props, usage examples, code snippets, Livewire components.
-  Trigger words: Flux, Flux UI, fluxui, blade component, Livewire component.
+  Keywords: Flux, Flux UI, fluxui, blade component.
+user-invocable: true
+disable-model-invocation: false
 ---
 
 # Flux UI CLI
