@@ -32,7 +32,7 @@
     "scripts": {
         "lint": "pint",
         "test:lint": "pint --test",
-        "test:types": "phpstan analyse"
+        "test:types": "phpstan analyse --memory-limit=512M"
     },
     "autoload": {
         "psr-4": {
