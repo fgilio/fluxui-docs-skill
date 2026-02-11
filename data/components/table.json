@@ -4,7 +4,7 @@
     "description": "",
     "category": "component",
     "url": "https://fluxui.dev/components/table",
-    "pro": true,
+    "pro": false,
     "sections": [
         {
             "title": "Simple",
@@ -76,5 +76,5 @@
         "table.row",
         "table.rows"
     ],
-    "scraped_at": "2025-12-23T17:54:21+00:00"
+    "scraped_at": "2026-02-11T03:25:15+00:00"
 }

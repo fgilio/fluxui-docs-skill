@@ -15,7 +15,7 @@
         },
         {
             "title": "Color",
-            "content": "Use standard Tailwind to control the color of the text so that you can more easily adapt to different screen sizes.\nStrong text color\nDefault text color\nSubtle text color\nColored text",
+            "content": "Use the variant and color props to adjust the text color based on its importance and context.\nStrong text color\nDefault text color\nSubtle text color\nColored text",
             "examples": [
                 "<flux:text variant=\"strong\">Strong text color</flux:text><flux:text>Default text color</flux:text><flux:text variant=\"subtle\">Subtle text color</flux:text><flux:text color=\"blue\">Colored text</flux:text>"
             ]
@@ -65,5 +65,5 @@
         "text"
     ],
     "sub_components": [],
-    "scraped_at": "2025-12-23T17:54:23+00:00"
+    "scraped_at": "2026-02-11T03:25:17+00:00"
 }

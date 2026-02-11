@@ -1,6 +1,6 @@
 {
     "version": "1.0",
-    "updated_at": "2025-12-23T17:54:36+00:00",
+    "updated_at": "2026-02-11T03:25:30+00:00",
     "items": [
         {
             "name": "accordion",
@@ -118,7 +118,7 @@
                 "card",
                 "sizes",
                 "icons",
-                "pill variant",
+                "rounded",
                 "as button",
                 "with close button",
                 "colors",
@@ -304,7 +304,7 @@
             "title": "Card",
             "description": "",
             "category": "components",
-            "pro": true,
+            "pro": false,
             "keywords": [
                 "card",
                 "accordion",
@@ -349,6 +349,9 @@
                 "line chart",
                 "area chart",
                 "multiple lines",
+                "bar chart",
+                "grouped bar chart",
+                "stacked bar chart",
                 "live summary",
                 "sparkline",
                 "dashboard stat",
@@ -986,7 +989,7 @@
             "title": "Pagination",
             "description": "",
             "category": "components",
-            "pro": true,
+            "pro": false,
             "keywords": [
                 "pagination",
                 "accordion",
@@ -1350,7 +1353,7 @@
             "title": "Table",
             "description": "",
             "category": "components",
-            "pro": true,
+            "pro": false,
             "keywords": [
                 "table",
                 "accordion",

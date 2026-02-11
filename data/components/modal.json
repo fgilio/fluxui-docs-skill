@@ -47,7 +47,7 @@
         },
         {
             "title": "Cancel events",
-            "content": "If you need to perform some logic after a modal is cancelled, you can register a cancel listener like so:",
+            "content": "If you need to perform some logic after a modal is cancelled by clicking outside or pressing escape, you can register a cancel listener like so:",
             "examples": [
                 "<flux:modal @cancel=\"someLivewireAction\"> <!-- ... --></flux:modal>"
             ]
@@ -127,5 +127,5 @@
         "modal.close",
         "modal.trigger"
     ],
-    "scraped_at": "2025-12-23T17:54:10+00:00"
+    "scraped_at": "2026-02-11T03:25:03+00:00"
 }

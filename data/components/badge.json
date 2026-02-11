@@ -21,17 +21,17 @@
             ]
         },
         {
-            "title": "Pill variant",
-            "content": "Display badges with a fully rounded border radius using the variant=\"pill\" prop.",
+            "title": "Rounded",
+            "content": "Display badges with a fully rounded border radius using the rounded prop.",
             "examples": [
-                "<flux:badge variant=\"pill\" icon=\"user\">Users</flux:badge>"
+                "<flux:badge rounded icon=\"user\">Users</flux:badge>"
             ]
         },
         {
             "title": "As button",
             "content": "Make the entire badge clickable by wrapping it in a button element.",
             "examples": [
-                "<flux:badge as=\"button\" variant=\"pill\" icon=\"plus\" size=\"lg\">Amount</flux:badge>"
+                "<flux:badge as=\"button\" rounded icon=\"plus\" size=\"lg\">Amount</flux:badge>"
             ]
         },
         {
@@ -90,5 +90,5 @@
     "sub_components": [
         "badge.close"
     ],
-    "scraped_at": "2025-12-23T17:53:52+00:00"
+    "scraped_at": "2026-02-11T03:24:43+00:00"
 }

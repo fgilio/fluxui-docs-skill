@@ -10,7 +10,7 @@
             "title": "Basic Usage",
             "content": "",
             "examples": [
-                "<flux:calendar value=\"2025-12-23\" />",
+                "<flux:calendar value=\"2026-02-11\" />",
                 "<flux:calendar wire:model=\"date\" />",
                 "<?phpuse Illuminate\\Support\\Carbon;use Livewire\\Component;class BookAppointment extends Component { public Carbon $date; public function mount() { $this->date = now(); }}"
             ]
@@ -20,7 +20,7 @@
             "content": "Select multiple non-consecutive dates.",
             "examples": [
                 "<flux:calendar multiple />",
-                "<flux:calendar multiple value=\"2025-12-02,2025-12-05,2025-12-15\"/>",
+                "<flux:calendar multiple value=\"2026-02-02,2026-02-05,2026-02-15\"/>",
                 "<flux:calendar multiple wire:model=\"dates\" />",
                 "<?phpuse Illuminate\\Support\\Carbon;use Livewire\\Component;class RequestTimeOff extends Component { public array $dates = []; public function mount() { $this->dates = [ now()->format('Y-m-d'), now()->addDays(1)->format('Y-m-d'), ]; }}"
             ]
@@ -30,7 +30,7 @@
             "content": "Select a range of dates.",
             "examples": [
                 "<flux:calendar mode=\"range\" />",
-                "<flux:calendar mode=\"range\" value=\"2025-12-02/2025-12-06\" />",
+                "<flux:calendar mode=\"range\" value=\"2026-02-02/2026-02-06\" />",
                 "<flux:calendar mode=\"range\" wire:model=\"range\" />",
                 "<?phpuse Livewire\\Component;class BookFlight extends Component { public ?array $range; public function book() { // ... $flight->depart_on = $this->range['start']; $flight->return_on = $this->range['end']; // ... }}",
                 "<?phpuse Livewire\\Component;use Flux\\DateRange;class BookFlight extends Component { public ?DateRange $range; public function book() { // ... $flight->depart_on = $this->range->start(); $flight->return_on = $this->range->end(); // ... }}",
@@ -41,7 +41,7 @@
             "title": "Range Configuration",
             "content": "",
             "examples": [
-                "<flux:calendar mode=\"range\" value=\"2025-12-02/2025-12-06\" />",
+                "<flux:calendar mode=\"range\" value=\"2026-02-02/2026-02-06\" />",
                 "<flux:calendar mode=\"range\" wire:model=\"range\" />",
                 "<?phpuse Livewire\\Component;class BookFlight extends Component { public ?array $range; public function book() { // ... $flight->depart_on = $this->range['start']; $flight->return_on = $this->range['end']; // ... }}",
                 "<?phpuse Livewire\\Component;use Flux\\DateRange;class BookFlight extends Component { public ?DateRange $range; public function book() { // ... $flight->depart_on = $this->range->start(); $flight->return_on = $this->range->end(); // ... }}",
@@ -59,14 +59,14 @@
             "title": "Static",
             "content": "Create a non-interactive calendar for display purposes.",
             "examples": [
-                "<flux:calendar static value=\"2025-12-23\" size=\"xs\" :navigation=\"false\"/>"
+                "<flux:calendar static value=\"2026-02-11\" size=\"xs\" :navigation=\"false\"/>"
             ]
         },
         {
             "title": "Min/max dates",
             "content": "Restrict the selectable date range by setting minimum and maximum boundaries.",
             "examples": [
-                "<flux:calendar max=\"2025-12-23\" />",
+                "<flux:calendar max=\"2026-02-11\" />",
                 "<!-- Prevent selection before today... --><flux:calendar min=\"today\" /><!-- Prevent selection after today... --><flux:calendar max=\"today\" />"
             ]
         },
@@ -74,7 +74,7 @@
             "title": "Unavailable dates",
             "content": "Disable specific dates from being selected. Useful for blocking out holidays, showing booked dates, or indicating unavailable time slots.",
             "examples": [
-                "<flux:calendar unavailable=\"2025-12-22,2025-12-24\" />"
+                "<flux:calendar unavailable=\"2026-02-10,2026-02-12\" />"
             ]
         },
         {
@@ -109,8 +109,8 @@
             "title": "Open to",
             "content": "Set the date that the calendar will open to, if there is no selected date.",
             "examples": [
-                "<flux:calendar open-to=\"2027-01-01\" />",
-                "<flux:calendar open-to=\"2027-01-01\" force-open-to />"
+                "<flux:calendar open-to=\"2027-03-01\" />",
+                "<flux:calendar open-to=\"2027-03-01\" force-open-to />"
             ]
         },
         {
@@ -187,5 +187,5 @@
         "calendar"
     ],
     "sub_components": [],
-    "scraped_at": "2025-12-23T17:53:55+00:00"
+    "scraped_at": "2026-02-11T03:24:46+00:00"
 }

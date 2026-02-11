@@ -4,7 +4,7 @@
     "description": "",
     "category": "component",
     "url": "https://fluxui.dev/components/card",
-    "pro": true,
+    "pro": false,
     "sections": [
         {
             "title": "Small card",
@@ -55,5 +55,5 @@
         "text"
     ],
     "sub_components": [],
-    "scraped_at": "2025-12-23T17:53:57+00:00"
+    "scraped_at": "2026-02-11T03:24:48+00:00"
 }

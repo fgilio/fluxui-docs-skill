@@ -86,7 +86,7 @@
             "title": "Configuring nginx",
             "content": "",
             "examples": [
-                "location ~ ^/flux/flux(\\.min)?\\.(js|css)$ { expires off; try_files $uri $uri/ /index.php?$query_string;}"
+                "location ~* ^/flux/flux(\\.min)?\\.(js|css)$ { expires off; try_files $uri $uri/ /index.php?$query_string;}"
             ]
         }
     ],
@@ -105,5 +105,5 @@
     ],
     "components_used": [],
     "sub_components": [],
-    "scraped_at": "2025-12-23T17:54:30+00:00"
+    "scraped_at": "2026-02-11T03:25:23+00:00"
 }

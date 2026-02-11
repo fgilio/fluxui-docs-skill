@@ -4,7 +4,7 @@
     "description": "",
     "category": "component",
     "url": "https://fluxui.dev/components/pagination",
-    "pro": true,
+    "pro": false,
     "sections": [
         {
             "title": "Simple paginator",
@@ -43,5 +43,5 @@
         "pagination"
     ],
     "sub_components": [],
-    "scraped_at": "2025-12-23T17:54:13+00:00"
+    "scraped_at": "2026-02-11T03:25:05+00:00"
 }
