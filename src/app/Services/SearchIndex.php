@@ -29,7 +29,7 @@ class SearchIndex
             return [];
         }
 
-        $query = mb_strtolower(trim($query));
+        $query = mb_strtolower(mb_trim($query));
         $results = [];
 
         foreach ($index['items'] as $item) {

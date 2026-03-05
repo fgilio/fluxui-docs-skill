@@ -156,7 +156,7 @@ class Scraper
     {
         $h1 = $crawler->filter('h1')->first();
 
-        return $h1->count() > 0 ? trim($h1->text()) : '';
+        return $h1->count() > 0 ? mb_trim($h1->text()) : '';
     }
 
     /**
@@ -175,7 +175,7 @@ class Scraper
         foreach ($selectors as $selector) {
             $p = $crawler->filter($selector)->first();
             if ($p->count() > 0) {
-                $text = trim($p->text());
+                $text = mb_trim($p->text());
                 if (mb_strlen($text) > 20) {
                     return $text;
                 }
@@ -222,7 +222,7 @@ class Scraper
 
         // Find h2 and h3 headings (some sites use h3 for subsections)
         $crawler->filter('h2, h3')->each(function (Crawler $heading) use (&$sections) {
-            $title = trim($heading->text());
+            $title = mb_trim($heading->text());
             $node = $heading->getNode(0);
 
             // Skip Reference section - handled separately
@@ -255,7 +255,7 @@ class Scraper
                 $headingCount = $parentCrawler->filter($node->nodeName)->count();
                 if ($headingCount === 1) {
                     $this->extractSectionContent($parentCrawler, $section);
-                    $section['content'] = trim($section['content']);
+                    $section['content'] = mb_trim($section['content']);
                     $sections[] = $section;
 
                     return;
@@ -278,7 +278,7 @@ class Scraper
                 $sibling = $sibling->nextSibling;
             }
 
-            $section['content'] = trim($section['content']);
+            $section['content'] = mb_trim($section['content']);
             $sections[] = $section;
         });
 
@@ -292,7 +292,7 @@ class Scraper
     {
         // Extract paragraphs
         $crawler->filter('p')->each(function (Crawler $p) use (&$section) {
-            $text = trim($p->text());
+            $text = mb_trim($p->text());
             if ($text && mb_strlen($text) > 5) {
                 $section['content'] .= $text."\n";
             }
@@ -300,7 +300,7 @@ class Scraper
 
         // Extract code blocks
         $crawler->filter('pre code, pre')->each(function (Crawler $code) use (&$section) {
-            $codeText = trim($code->text());
+            $codeText = mb_trim($code->text());
             if ($codeText && ! in_array($codeText, $section['examples'])) {
                 $section['examples'][] = $codeText;
             }
@@ -316,7 +316,7 @@ class Scraper
 
         // Find h2 with "Reference" text
         $refH2 = $crawler->filter('h2')->reduce(function (Crawler $node) {
-            return mb_strtolower(trim($node->text())) === 'reference';
+            return mb_strtolower(mb_trim($node->text())) === 'reference';
         })->first();
 
         if ($refH2->count() === 0) {
@@ -342,7 +342,7 @@ class Scraper
 
                 // h3 = component name
                 if ($sibling->nodeName === 'h3') {
-                    $currentComponent = trim($siblingCrawler->text());
+                    $currentComponent = mb_trim($siblingCrawler->text());
                     $reference[$currentComponent] = [
                         'props' => [],
                         'slots' => [],
@@ -369,7 +369,7 @@ class Scraper
     {
         $headers = [];
         $table->filter('thead th, thead td')->each(function (Crawler $th) use (&$headers) {
-            $headers[] = mb_strtolower(trim($th->text()));
+            $headers[] = mb_strtolower(mb_trim($th->text()));
         });
 
         // Determine table type from headers
@@ -380,7 +380,7 @@ class Scraper
         $table->filter('tbody tr')->each(function (Crawler $row) use (&$ref, $isPropTable, $isSlotTable, $isAttrTable) {
             $cells = [];
             $row->filter('td')->each(function (Crawler $td) use (&$cells) {
-                $cells[] = trim($td->text());
+                $cells[] = mb_trim($td->text());
             });
 
             if (count($cells) < 2) {
