@@ -13,6 +13,11 @@ disable-model-invocation: false
 
 Offline Flux UI documentation with JSON output for Claude Code integration.
 
+## Execution
+
+`fluxui-docs` is a self-contained binary available on PATH.
+Run it directly - never prefix with `bun`, `node`, `php`, or any runtime.
+
 ## Quick Reference
 
 | Command | Purpose |
