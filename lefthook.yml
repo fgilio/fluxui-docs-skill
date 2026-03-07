@@ -3,10 +3,10 @@ pre-commit:
     pint:
       glob: "*.php"
       root: "src/"
-      run: ./vendor/bin/pint {staged_files} && git add {staged_files}
+      run: 'if command -v herd &>/dev/null; then herd php ./vendor/bin/pint {staged_files}; else ./vendor/bin/pint {staged_files}; fi && git add {staged_files}'
 
 pre-push:
   commands:
     phpstan:
       root: "src/"
-      run: composer test:types
+      run: 'if command -v herd &>/dev/null; then herd php vendor/bin/phpstan analyse --memory-limit=512M; else composer test:types; fi'
