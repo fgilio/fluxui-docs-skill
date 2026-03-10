@@ -2,10 +2,16 @@
   "chmod": "0755",
   "finder": [
     {
-      "in": ["app", "bootstrap", "config"]
+      "in": [
+        "app",
+        "bootstrap",
+        "config"
+      ]
     },
     {
-      "in": ["vendor"],
+      "in": [
+        "vendor"
+      ],
       "exclude": [
         "jolicode/jolinotif/bin",
         "jolicode/jolinotif/tests",
@@ -41,18 +47,37 @@
         "symfony/var-dumper/Test"
       ],
       "notName": [
-        "*.exe", "*.dll", "*.bat", "*.phar",
-        "*.md", "*.txt", "*.rst",
-        "*.dist", "*.neon", "*.stub",
-        "*.gif", "*.png", "*.svg", "*.jpg",
-        "*.xsd", "*.yml", "*.yaml",
-        "*.css", "*.js",
+        "*.exe",
+        "*.dll",
+        "*.bat",
+        "*.phar",
+        "*.md",
+        "*.txt",
+        "*.rst",
+        "*.dist",
+        "*.neon",
+        "*.stub",
+        "*.gif",
+        "*.png",
+        "*.svg",
+        "*.jpg",
+        "*.xsd",
+        "*.yml",
+        "*.yaml",
+        "*.css",
+        "*.js",
         "*.h",
         "*.lock",
-        "LICENSE*", "CHANGELOG*", "UPGRADE*",
+        "LICENSE*",
+        "CHANGELOG*",
+        "UPGRADE*",
         "castor.php",
-        ".gitignore", ".gitattributes", ".editorconfig",
-        ".php-cs-fixer.php", ".deepsource.toml", ".styleci.yml"
+        ".gitignore",
+        ".gitattributes",
+        ".editorconfig",
+        ".php-cs-fixer.php",
+        ".deepsource.toml",
+        ".styleci.yml"
       ]
     }
   ],

@@ -77,16 +77,16 @@
         },
         {
             "name": "fgilio/agent-skill-foundation",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fgilio/agent-skill-foundation",
-                "reference": "d3a805f8981514dcea92c6fe517fbce6b95ba6fb"
+                "reference": "d29b9c91279bbe514657ab838e3b8d60a6514ad0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fgilio/agent-skill-foundation/zipball/d3a805f8981514dcea92c6fe517fbce6b95ba6fb",
-                "reference": "d3a805f8981514dcea92c6fe517fbce6b95ba6fb",
+                "url": "https://api.github.com/repos/fgilio/agent-skill-foundation/zipball/d29b9c91279bbe514657ab838e3b8d60a6514ad0",
+                "reference": "d29b9c91279bbe514657ab838e3b8d60a6514ad0",
                 "shasum": ""
             },
             "require": {
@@ -133,7 +133,7 @@
                 "routing",
                 "skills"
             ],
-            "time": "2026-01-06T20:11:18+00:00"
+            "time": "2026-03-10T08:59:31+00:00"
         },
         {
             "name": "filp/whoops",
