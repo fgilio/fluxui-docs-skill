@@ -1,97 +1,97 @@
 {
-  "chmod": "0755",
-  "finder": [
-    {
-      "in": [
-        "app",
-        "bootstrap",
-        "config"
-      ]
-    },
-    {
-      "in": [
-        "vendor"
-      ],
-      "exclude": [
-        "jolicode/jolinotif/bin",
-        "jolicode/jolinotif/tests",
-        "jolicode/jolinotif/doc",
-        "jolicode/jolinotif/example",
-        "jolicode/jolinotif/tools",
-        "jolicode/php-os-helper/tools",
-        "nesbot/carbon/bin",
-        "nesbot/carbon/src/Carbon/Lang",
-        "laravel-zero/framework/bin",
-        "laravel-zero/foundation/src/Illuminate/Foundation/resources/exceptions",
-        "laravel-zero/foundation/src/Illuminate/Foundation/Console/stubs",
-        "laravel-zero/foundation/src/Illuminate/Foundation/Testing",
-        "laravel-zero/framework/src/Testing",
-        "illuminate/support/Testing",
-        "illuminate/http/Testing",
-        "filp/whoops/src/Whoops/Resources",
-        "symfony/error-handler/Resources",
-        "symfony/var-dumper/Resources/bin",
-        "symfony/var-dumper/Resources/css",
-        "symfony/var-dumper/Resources/js",
-        "symfony/translation/Resources/bin",
-        "symfony/translation/Resources/schemas",
-        "psr/http-message/docs",
-        "symfony/http-kernel/Resources",
-        "nunomaduro/collision/src/Adapters/Laravel/Commands/stubs",
-        "symfony/clock/Test",
-        "symfony/http-foundation/Test",
-        "symfony/mime/Test",
-        "symfony/service-contracts/Test",
-        "symfony/translation/Test",
-        "symfony/translation-contracts/Test",
-        "symfony/var-dumper/Test"
-      ],
-      "notName": [
-        "*.exe",
-        "*.dll",
-        "*.bat",
-        "*.phar",
-        "*.md",
-        "*.txt",
-        "*.rst",
-        "*.dist",
-        "*.neon",
-        "*.stub",
-        "*.gif",
-        "*.png",
-        "*.svg",
-        "*.jpg",
-        "*.xsd",
-        "*.yml",
-        "*.yaml",
-        "*.css",
-        "*.js",
-        "*.h",
-        "*.lock",
-        "LICENSE*",
-        "CHANGELOG*",
-        "UPGRADE*",
-        "castor.php",
-        ".gitignore",
-        ".gitattributes",
-        ".editorconfig",
-        ".php-cs-fixer.php",
-        ".deepsource.toml",
-        ".styleci.yml"
-      ]
-    }
-  ],
-  "files": [
-    "composer.json"
-  ],
-  "exclude-composer-files": false,
-  "compression": "GZ",
-  "compactors": [
-    "KevinGH\\Box\\Compactor\\Php",
-    "KevinGH\\Box\\Compactor\\Json"
-  ],
-  "exclude-dev-files": true,
-  "main": "fluxui-docs",
-  "output": "builds/fluxui-docs.phar",
-  "check-requirements": false
+    "chmod": "0755",
+    "finder": [
+        {
+            "in": [
+                "app",
+                "bootstrap",
+                "config"
+            ]
+        },
+        {
+            "in": [
+                "vendor"
+            ],
+            "exclude": [
+                "jolicode/jolinotif/bin",
+                "jolicode/jolinotif/tests",
+                "jolicode/jolinotif/doc",
+                "jolicode/jolinotif/example",
+                "jolicode/jolinotif/tools",
+                "jolicode/php-os-helper/tools",
+                "nesbot/carbon/bin",
+                "nesbot/carbon/src/Carbon/Lang",
+                "laravel-zero/framework/bin",
+                "laravel-zero/foundation/src/Illuminate/Foundation/resources/exceptions",
+                "laravel-zero/foundation/src/Illuminate/Foundation/Console/stubs",
+                "laravel-zero/foundation/src/Illuminate/Foundation/Testing",
+                "laravel-zero/framework/src/Testing",
+                "illuminate/support/Testing",
+                "illuminate/http/Testing",
+                "filp/whoops/src/Whoops/Resources",
+                "symfony/error-handler/Resources",
+                "symfony/var-dumper/Resources/bin",
+                "symfony/var-dumper/Resources/css",
+                "symfony/var-dumper/Resources/js",
+                "symfony/translation/Resources/bin",
+                "symfony/translation/Resources/schemas",
+                "psr/http-message/docs",
+                "symfony/http-kernel/Resources",
+                "nunomaduro/collision/src/Adapters/Laravel/Commands/stubs",
+                "symfony/clock/Test",
+                "symfony/http-foundation/Test",
+                "symfony/mime/Test",
+                "symfony/service-contracts/Test",
+                "symfony/translation/Test",
+                "symfony/translation-contracts/Test",
+                "symfony/var-dumper/Test"
+            ],
+            "notName": [
+                "*.exe",
+                "*.dll",
+                "*.bat",
+                "*.phar",
+                "*.md",
+                "*.txt",
+                "*.rst",
+                "*.dist",
+                "*.neon",
+                "*.stub",
+                "*.gif",
+                "*.png",
+                "*.svg",
+                "*.jpg",
+                "*.xsd",
+                "*.yml",
+                "*.yaml",
+                "*.css",
+                "*.js",
+                "*.h",
+                "*.lock",
+                "LICENSE*",
+                "CHANGELOG*",
+                "UPGRADE*",
+                "castor.php",
+                ".gitignore",
+                ".gitattributes",
+                ".editorconfig",
+                ".php-cs-fixer.php",
+                ".deepsource.toml",
+                ".styleci.yml"
+            ]
+        }
+    ],
+    "files": [
+        "composer.json"
+    ],
+    "exclude-composer-files": false,
+    "compression": "GZ",
+    "compactors": [
+        "KevinGH\\Box\\Compactor\\Php",
+        "KevinGH\\Box\\Compactor\\Json"
+    ],
+    "exclude-dev-files": true,
+    "main": "fluxui-docs",
+    "output": "builds/fluxui-docs.phar",
+    "check-requirements": false
 }
